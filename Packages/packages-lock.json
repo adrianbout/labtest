@@ -31,15 +31,6 @@
       },
       "hash": "394d7432b46e0d95b052590c558658646682ccb3"
     },
-    "com.readyplayerme.photonsupport": {
-      "version": "https://github.com/readyplayerme/rpm-unity-sdk-photon-support.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0"
-      },
-      "hash": "254afd0000ef761a25ae4a9da5f94f34a716de81"
-    },
     "com.readyplayerme.webview": {
       "version": "https://github.com/readyplayerme/rpm-unity-sdk-webview.git#v1.2.0",
       "depth": 0,
