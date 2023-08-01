@@ -4,7 +4,6 @@ using ExitGames.Client.Photon; // Add this namespace for using ExitGames.Client.
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using GLTFast.Schema;
 
 public class PlayerCustomization : MonoBehaviourPunCallbacks
 {
@@ -35,7 +34,6 @@ public class PlayerCustomization : MonoBehaviourPunCallbacks
         foreach (Transform tr in hatsContainer.GetComponentsInChildren<Transform>())
         {
             hats.Add(tr.gameObject);
-            Debug.Log("A");
         }
     }
     public void SelectAccessories(int index)
@@ -45,8 +43,6 @@ public class PlayerCustomization : MonoBehaviourPunCallbacks
             hats[i].SetActive(i == index);
         }
     }
-
-
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
         if(targetPlayer == null || changedProps == null)
@@ -63,7 +59,7 @@ public class PlayerCustomization : MonoBehaviourPunCallbacks
 
             if (changedProps.ContainsKey("playerName"))
             {
-                //playerName.text = (string)changedProps["playerName"];
+                playerName.text = (string)changedProps["playerName"];
             }
         }
     }

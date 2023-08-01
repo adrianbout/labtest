@@ -1943,6 +1943,8 @@ GameObject:
   - component: {fileID: 3187868149680846422}
   - component: {fileID: 2944521282659606153}
   - component: {fileID: 1059505801912872932}
+  - component: {fileID: 909392578399550306}
+  - component: {fileID: 141121695885015052}
   m_Layer: 0
   m_Name: RPM_Photon_Test_Character
   m_TagString: Untagged
@@ -2098,7 +2100,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5478764770548135642}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 384fd972fdea5ee47a8dc9812048cc27, type: 3}
   m_Name: 
@@ -2114,6 +2116,40 @@ MonoBehaviour:
   - {fileID: 7796004393606861389}
   - {fileID: 7973957457127586267}
   playerName: {fileID: 6383272821223756191}
+--- !u!114 &909392578399550306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478764770548135642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2121cbac8834f4c96abea973b11737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 6383272821223756191}
+  hats:
+  - {fileID: 2974205258759856318}
+  - {fileID: 5274923468757938649}
+  - {fileID: 7967464899997751782}
+  - {fileID: 2291057835120367785}
+  - {fileID: 1741915787305604129}
+  - {fileID: 3906741699842971353}
+  - {fileID: 7796004393606861389}
+  - {fileID: 7973957457127586267}
+--- !u!114 &141121695885015052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478764770548135642}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df9d7c38d4ca9145abb5759beecb7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5556031972815465204
 GameObject:
   m_ObjectHideFlags: 0
