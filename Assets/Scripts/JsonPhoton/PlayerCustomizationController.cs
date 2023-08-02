@@ -12,6 +12,9 @@ public class PlayerCustomizationController : MonoBehaviourPunCallbacks
     private PhotonView PV;
     public TMP_Text title;
     public List<GameObject> hats;
+    private int currentHatIndex = -1;
+    private int currentIndex = 0;
+
     private void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -19,6 +22,7 @@ public class PlayerCustomizationController : MonoBehaviourPunCallbacks
         customizationData = new PlayerCustomizationData { hat = 1, title = "" };
         UpdatePlayerCustomization(customizationData);
     }
+
     public void SelectAccessories(int index)
     {
         for (int i = 0; i < hats.Count; i++)
@@ -27,14 +31,23 @@ public class PlayerCustomizationController : MonoBehaviourPunCallbacks
         }
     }
 
+
     public void UpdatePlayerCustomization(PlayerCustomizationData data)
     {
-        string jsonString = JsonUtility.ToJson(data);
-        customPropreties.Remove("PlayerCustomization");
-        customPropreties.Add("PlayerCustomization", jsonString);
-        PhotonNetwork.LocalPlayer.SetCustomProperties(customPropreties);
+        customizationData = data;
         UpdateTitleText();
         SelectAccessories(customizationData.hat);
+
+        string jsonString = JsonUtility.ToJson(data);
+        if (customPropreties.ContainsKey("PlayerCustomization"))
+        {
+            customPropreties["PlayerCustomization"] = jsonString;
+        }
+        else
+        {
+            customPropreties.Add("PlayerCustomization", jsonString);
+        }
+        PhotonNetwork.LocalPlayer.SetCustomProperties(customPropreties);
     }
 
     public PlayerCustomizationData GetPlayerCustomization()
@@ -50,9 +63,12 @@ public class PlayerCustomizationController : MonoBehaviourPunCallbacks
 
         if (!PV.IsMine && targetPlayer == PV.Owner)
         {
-            string jsonString = (string)targetPlayer.CustomProperties["PlayerCustomization"];
-            PlayerCustomizationData data = JsonUtility.FromJson<PlayerCustomizationData>(jsonString);
-            ApplyCustomizationData(data);
+            if (changedProps.ContainsKey("PlayerCustomization"))
+            {
+                string jsonString = (string)changedProps["PlayerCustomization"];
+                PlayerCustomizationData data = JsonUtility.FromJson<PlayerCustomizationData>(jsonString);
+                ApplyCustomizationData(data);
+            }
         }
     }
 
@@ -65,14 +81,7 @@ public class PlayerCustomizationController : MonoBehaviourPunCallbacks
 
     private void UpdateTitleText()
     {
-        string newTitle = customizationData.title.ToString();
-        PV.RPC("UpdateTitleRPC", RpcTarget.AllBuffered, newTitle);
-    }
-
-    [PunRPC]
-    public void UpdateTitleRPC(string newTitle)
-    {
-        title.text = newTitle;
+        title.text = customizationData.title.ToString();
     }
 
     private void Update()
@@ -81,8 +90,9 @@ public class PlayerCustomizationController : MonoBehaviourPunCallbacks
         {
             if (PV.IsMine)
             {
-                customizationData.hat += 1;
-                customizationData.title = "agfr";
+                currentIndex = (currentIndex + 1) % hats.Count;
+                customizationData.hat = currentIndex;
+                customizationData.title = currentIndex.ToString();
                 UpdatePlayerCustomization(customizationData);
             }
         }
